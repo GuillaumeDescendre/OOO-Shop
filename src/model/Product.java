@@ -1,14 +1,20 @@
 package model;
 
-public abstract class Product implements PriceStrategy{
+public abstract class Product {
 
     private int id;
     String naam;
     boolean uitgeleend;
+    PriceStrategy priceStrategy;
 
     public Product(String naam){
         this.naam = naam;
         uitgeleend = false;
+    }
+
+
+    public void setPriceStrategy(PriceStrategy priceStrategy){
+        this.priceStrategy = priceStrategy;
     }
 
     public void setUitgeleend(boolean uitgeleend) {
@@ -25,6 +31,10 @@ public abstract class Product implements PriceStrategy{
 
     public int getId() {
         return id;
+    }
+
+    public double getPrice(int days){
+        return priceStrategy.getPrice(days);
     }
 
     public String getNaam() {

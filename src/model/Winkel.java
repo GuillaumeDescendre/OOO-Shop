@@ -61,11 +61,7 @@ public class Winkel {
 
     public void deleteProductonId(int id){
         if(id > producten.size()) throw new IllegalArgumentException("Bij id '" + id + "' hoort geen product");
-        for(Product p : producten){
-            if(p.getId() == id){
-                producten.remove(p);
-            }
-        }
+        producten.removeIf(p -> p.getId() == id);
     }
 
     public int totaalAantalProducten(){
