@@ -141,7 +141,7 @@ public class WinkelUI {
                     Product selectedproduct = winkel.getProductById(productid);
                     String dagen = JOptionPane.showInputDialog(selectedproduct.toString() + "\n How many days?");
                     int days = Integer.parseInt(dagen);
-                    double prijs = winkel.getPrice(productid, days);
+                    double prijs = winkel.getProductById(productid).getPrice(days);
                     JOptionPane.showMessageDialog(null, prijs + " €", "Product " + id, JOptionPane.INFORMATION_MESSAGE);
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);

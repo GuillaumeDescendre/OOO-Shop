@@ -68,23 +68,6 @@ public class Winkel {
         }
     }
 
-    public double getPrice(int productid, int days) {
-        double price = 0;
-        Product p = getProductById(productid);
-        if(p instanceof Movie){
-            price = 5;
-            int daysLeft = days - 3;
-            if (daysLeft > 0) {
-                price += (daysLeft * 2);
-            }
-        } else if(p instanceof Game){
-            price = days * 3;
-        } else if(p instanceof Cd){
-            price = days * 1.5;
-        }
-        return price;
-    }
-
     public int totaalAantalProducten(){
         return producten.size();
     }

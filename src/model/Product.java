@@ -1,6 +1,6 @@
 package model;
 
-public abstract class Product {
+public abstract class Product implements PriceStrategy{
 
     private int id;
     String naam;
