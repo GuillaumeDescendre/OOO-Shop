@@ -7,7 +7,6 @@ public abstract class Product {
     boolean uitgeleend;
 
     public Product(String naam){
-        this.id = id;
         this.naam = naam;
         uitgeleend = false;
     }
