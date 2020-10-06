@@ -1,0 +1,14 @@
+# IntelliJ
+.idea/
+
+# local config
+*.iml
+*.iws
+
+# Mac
+.DS_Store
+
+# Maven
+log/
+target/
+
