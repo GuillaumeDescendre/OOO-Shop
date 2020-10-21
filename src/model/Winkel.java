@@ -19,6 +19,7 @@ public class Winkel {
         if(producten.contains(product)) throw new IllegalArgumentException("Product bestaat al in winkel");
         if(containsProduct(product)) throw new IllegalArgumentException("Product bestaat al in winkel!");
         int size = producten.size();
+        System.out.println("addProduct: "+size);
         product.setId(size);
         System.out.println("id: " + size);
         this.producten.add(product);

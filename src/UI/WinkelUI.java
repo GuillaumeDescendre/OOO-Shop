@@ -11,28 +11,23 @@ import java.util.Scanner;
 public class WinkelUI {
 
 
-
     public static void main(String[] args) throws IOException {
         Scanner input = new Scanner(new File("shop.txt"));
         input.useDelimiter("-|\n");
         Winkel winkel = new Winkel("OOO-Winkel");
+        ProductFactory productFactory = new ProductFactory();
 
         while(input.hasNext()) {
             String type = input.next();
             String name = input.next();
 
-            if(type.equalsIgnoreCase("game")) {
-                Product newProduct = new Game(name);
-                winkel.addProduct(newProduct);
-            }else if(type.equalsIgnoreCase("movie")){
-                Product newProduct = new Movie(name);
-                winkel.addProduct(newProduct);
-            }else if(type.equalsIgnoreCase("cd")){
-                Product newProduct = new Cd(name);
-                winkel.addProduct(newProduct);
-        }else{
-                break;
+            try {
+                Product product = productFactory.createProduct(name, type);
+                winkel.addProduct(product);
+            }catch (Exception e){
+                System.out.println(e);
             }
+
     }
 
 
@@ -48,47 +43,11 @@ public class WinkelUI {
 
             if (choice == 1) {
                 String title = JOptionPane.showInputDialog("Enter the product title:");
-                if (title == null || title.trim().isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "Title cannot be empty!", "Error!", JOptionPane.ERROR_MESSAGE);
-                    throw new IllegalArgumentException("Not a valid title");
-                }
-
                 String type = JOptionPane.showInputDialog("Enter the type (M for movie/G for game/C for CD):");
-                if (type == null || type.trim().isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "Type cannot be empty!", "Error!", JOptionPane.ERROR_MESSAGE);
-                    throw new IllegalArgumentException("Not a valid type");
-                }
-
-                if (!winkel.existingProduct(type)) {
-                    JOptionPane.showMessageDialog(null, type + " is not a valid type", "Error!", JOptionPane.ERROR_MESSAGE);
-                    throw new IllegalArgumentException("Not a valid type");
-                }
-                if (type.equals("M")) {
-                    try {
-                        Product product = new Movie(title);
-                        winkel.addProduct(product);
-                        JOptionPane.showMessageDialog(null, "Product toegevoegd!");
-                    } catch (Exception e) {
-                        JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                    }
-                }
-                if (type.equals("G")) {
-                    try {
-                        Product product = new Game(title);
-                        winkel.addProduct(product);
-                        JOptionPane.showMessageDialog(null, "Product toegevoegd!");
-                    } catch (Exception e) {
-                        JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                    }
-                }
-                if (type.equals("C")) {
-                    try {
-                        Product product = new Cd(title);
-                        winkel.addProduct(product);
-                        JOptionPane.showMessageDialog(null, "Product toegevoegd!");
-                    } catch (Exception e) {
-                        JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                    }
+                try {
+                    productFactory.createProduct(title, type);
+                }catch(Exception e){
+                    JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
 

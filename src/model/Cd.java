@@ -7,5 +7,4 @@ public class Cd extends Product{
         this.priceStrategy = new PriceCdStrategy();
     }
 
-
 }
