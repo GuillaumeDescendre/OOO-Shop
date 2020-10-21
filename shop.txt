@@ -1,4 +1,14 @@
-movie-fast&furios
-game-CallOfDuty
-game-Battlefield
-cd-Metallica
+Mfast&furios
+Mtitanic
+Msuperman
+Mbatman
+Minception
+Mwolfofwallstreet
+Mde kampioenen
+GCallOfDuty
+GBattlefield
+Gfortnite
+Gmariokart
+CMetallica
+CMarcoBorsato
+CAnouk

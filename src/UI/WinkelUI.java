@@ -17,15 +17,17 @@ public class WinkelUI {
         Winkel winkel = new Winkel("OOO-Winkel");
         ProductFactory productFactory = new ProductFactory();
 
+
         while(input.hasNext()) {
-            String type = input.next();
-            String name = input.next();
 
             try {
+                String type = input.next();
+                String name = input.next();
                 Product product = productFactory.createProduct(name, type);
                 winkel.addProduct(product);
-            }catch (Exception e){
-                System.out.println(e);
+            }    catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+
             }
 
     }
@@ -45,7 +47,8 @@ public class WinkelUI {
                 String title = JOptionPane.showInputDialog("Enter the product title:");
                 String type = JOptionPane.showInputDialog("Enter the type (M for movie/G for game/C for CD):");
                 try {
-                    productFactory.createProduct(title, type);
+                    Product product = productFactory.createProduct(title, type);
+                    winkel.addProduct(product);
                 }catch(Exception e){
                     JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
@@ -112,13 +115,9 @@ public class WinkelUI {
                 try {
                     int productid = Integer.parseInt(id);
                     Product selectedproduct = winkel.getProductById(productid);
-                    if (selectedproduct.isUitgeleend()) {
-                        JOptionPane.showMessageDialog(null, "Product is already reserved", "Error", JOptionPane.ERROR_MESSAGE);
-                    } else {
-                        selectedproduct.setUitgeleend(true);
-                        JOptionPane.showMessageDialog(null, "Product reserved!", "Product " + id, JOptionPane.INFORMATION_MESSAGE);
+                    selectedproduct.rentProduct();
                     }
-                } catch (Exception e) {
+                 catch (Exception e) {
                     JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
@@ -128,7 +127,7 @@ public class WinkelUI {
                 try {
                     int productid = Integer.parseInt(id);
                     Product selectedproduct = winkel.getProductById(productid);
-                    if (selectedproduct.isUitgeleend()) {
+                    if (selectedproduct.getState() == selectedproduct.getIsDamagedState() || selectedproduct.getState() == selectedproduct.getIsRentedState()) {
                         JOptionPane.showMessageDialog(null, "ID: " + selectedproduct.getId() + " Naam: " + selectedproduct.getNaam() + "\nNot available!", "Info", JOptionPane.INFORMATION_MESSAGE);
                     } else {
                         JOptionPane.showMessageDialog(null, "ID: " + selectedproduct.getId() + " Naam: " + selectedproduct.getNaam() + "\nAvailable!", "Info", JOptionPane.INFORMATION_MESSAGE);
@@ -144,13 +143,13 @@ public class WinkelUI {
                 ArrayList<Game> games = winkel.getGames();
                 ArrayList<Cd> cds = winkel.getCDs();
                 for (Movie m: movies) {
-                    writer.write("movie-"+m.getNaam()+"\n");
+                    writer.write("M"+m.getNaam()+"\n");
                 }
                 for (Game g: games) {
-                    writer.write("game-"+g.getNaam()+"\n");
+                    writer.write("G"+g.getNaam()+"\n");
                 }
                 for (Cd c: cds) {
-                    writer.write("cd-"+c.getNaam()+"\n");
+                    writer.write("C"+c.getNaam()+"\n");
                 }
                 writer.close();
             }

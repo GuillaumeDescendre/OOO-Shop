@@ -19,6 +19,6 @@ public class IsDamagedState implements State{
 
     @Override
     public void repairProduct() {
-        product.damaged = false;
+        product.setState(product.isAvailableState);
     }
 }

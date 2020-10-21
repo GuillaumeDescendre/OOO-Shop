@@ -4,20 +4,16 @@ public abstract class Product {
 
     private int id;
     String naam;
-    boolean uitgeleend;
-    boolean damaged;
     PriceStrategy priceStrategy;
 
     State isAvailableState, isRentedState, isDamagedState;
     State state;
 
-    public Product(String naamn){
+    public Product(String naam){
         isAvailableState = new IsAvailableState(this);
         isRentedState = new IsRentedState(this);
         isDamagedState = new IsDamagedState(this);
         this.naam = naam;
-        uitgeleend = false;
-        damaged = false;
     }
 
     public void rentProduct(){
@@ -47,6 +43,7 @@ public abstract class Product {
     }
 
     public void setId(int size) {
+        System.out.println("Size: " + size);
         this.id = size;
     }
 
@@ -54,14 +51,9 @@ public abstract class Product {
         this.priceStrategy = priceStrategy;
     }
 
-    public void setUitgeleend(boolean uitgeleend) {
-        this.uitgeleend = uitgeleend;
-    }
 
 
-    public boolean isUitgeleend() {
-        return uitgeleend;
-    }
+
 
     public int getId() {
         return id;
@@ -77,10 +69,10 @@ public abstract class Product {
 
     public String toString(){
         String ret =  " ID: " + id + " Naam: " + naam + " Type: " + getClass().getSimpleName();
-        if(uitgeleend){
-            ret += " | Niet beschikbaar";
+        if(getState() == isAvailableState){
+            ret += " | beschikbaar";
         } else {
-            ret += " | Beschikbaar";
+            ret += " | Niet Beschikbaar";
         }
         return ret;
     }

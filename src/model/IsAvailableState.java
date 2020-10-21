@@ -9,7 +9,7 @@ public class IsAvailableState implements State{
 
     @Override
     public void rentProduct() {
-        product.uitgeleend = true;
+        product.setState(product.isRentedState);
     }
 
     @Override

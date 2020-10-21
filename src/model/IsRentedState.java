@@ -14,10 +14,10 @@ public class IsRentedState implements State{
 
     @Override
     public void returnProduct() {
-        product.uitgeleend = false;
+        product.setState(product.isAvailableState);
         double damageFactor = (int)(Math.random() * ((4 - 1) + 1)) + 1;
         if(damageFactor == 1){
-            product.damaged = true;
+            product.setState(product.isDamagedState);
         }
     }
 

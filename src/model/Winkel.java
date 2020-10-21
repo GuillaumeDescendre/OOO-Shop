@@ -21,6 +21,7 @@ public class Winkel {
         int size = producten.size();
         System.out.println("addProduct: "+size);
         product.setId(size);
+        product.setState(product.isAvailableState);
         System.out.println("id: " + size);
         this.producten.add(product);
     }
@@ -79,6 +80,8 @@ public class Winkel {
         return films;
     }
 
+
+
     public ArrayList getGames(){
         ArrayList<Product>games = new ArrayList<>();
         for(Product p : producten){
@@ -112,6 +115,7 @@ public class Winkel {
         for(Product p : producten){
             ret+= "\n" + p.toString();
         }
+
         return ret;
     }
 

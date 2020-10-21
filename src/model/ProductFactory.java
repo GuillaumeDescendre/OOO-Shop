@@ -10,19 +10,20 @@ public class ProductFactory {
             throw new IllegalArgumentException("name can't be empty!");
         }if (type == null || type.trim().isEmpty()) {
             throw new IllegalArgumentException("Not a valid type");
-        }else {
-            if (type.equals("G")) {
+        }else if (type.equals("G")) {
                 product = new Game(name);
-            }
-            if (type.equals("C")) {
+             }
+          else if (type.equals("C")) {
                 product = new Cd(name);
             }
-            if (type.equals("M")) {
+          else if (type.equals("M")) {
                 product = new Movie(name);
-            }
-            System.out.println(product);
-            return product;
+            } else {
+              throw new IllegalArgumentException("Wrong argument!");
         }
+        System.out.println(product);
+          product.setState(product.isAvailableState);
+        return product;
     }
 
 
